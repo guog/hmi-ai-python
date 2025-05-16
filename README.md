@@ -1,5 +1,9 @@
 # hmi-ai-python
 
+## HTTP API 调用
+
+参见[API 调用说明](./docs/README.md).
+
 ## 开发环境准备
 
 - uv: 管理 python 版本,依赖。[Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
@@ -11,6 +15,13 @@
 ```sh
 uv sync
 uv run fastapi dev
+```
+
+根据需要执行以下
+
+```shell
+# 激活虚拟环境,适用于macos或linux
+source ./.venv/bin/activate
 ```
 
 ## 主要技术栈
