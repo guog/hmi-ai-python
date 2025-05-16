@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 async def create_paper(input: str):
-  yield f"event: message\ndata: {
+  yield f"event:message\ndata:{
     json.dumps(
       {'content': '准备创建图纸', 'createdAt': f'{datetime.now().isoformat()}'}
     )
@@ -14,7 +14,7 @@ async def create_paper(input: str):
     json.dumps(
       {
         'content': '寻找合适的模版',
-        'createdAt': f'{datetime.now().strftime()}',
+        'createdAt': f'{datetime.now().isoformat()}',
         'payload': {},
       }
     )
@@ -24,7 +24,7 @@ async def create_paper(input: str):
     json.dumps(
       {
         'content': '需要用户确认使用模版',
-        'createdAt': f'{datetime.now().strptime()}',
+        'createdAt': f'{datetime.now().isoformat()}',
       }
     )
   }\n\n"

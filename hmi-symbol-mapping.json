@@ -1,0 +1,167 @@
+{
+  "泵": {
+    "name": "泵",
+    "code": "1923212338178334720",
+    "path": "symbols/Xmagital图符/E离心泵_2.json"
+  },
+  "左泵": {
+    "name": "左泵",
+    "code": "1922958446022664192",
+    "path": "symbols/Xmagital图符/E离心泵_左.json"
+  },
+  "右泵": {
+    "name": "右泵",
+    "code": "1836661495764488194",
+    "path": "symbols/Xmagital图符/E离心泵.json"
+  },
+  "电磁阀": {
+    "name": "电磁阀",
+    "code": "1836661495764488196",
+    "path": "symbols/Xmagital图符/矩形阀门.json"
+  },
+  "电磁阀左": {
+    "name": "电磁阀左",
+    "code": "1922953514443907072",
+    "path": "symbols/Xmagital图符/矩形阀门_左.json"
+  },
+  "电磁阀右": {
+    "name": "电磁阀右",
+    "code": "1922953503802957824",
+    "path": "symbols/Xmagital图符/矩形阀门_右.json"
+  },
+  "电动机": {
+    "name": "电动机",
+    "code": "1836661495768682496",
+    "path": "symbols/Xmagital图符/D电机.json"
+  },
+  "控制阀": {
+    "name": "控制阀",
+    "code": "1836664296523567107",
+    "path": "symbols/Xmagital图符/扇形阀门4.json"
+  },
+  "控制阀上": {
+    "name": "控制阀上",
+    "code": "1836664296523567107",
+    "path": "symbols/Xmagital图符/C控制阀.json"
+  },
+  "控制阀下": {
+    "name": "控制阀下",
+    "code": "1836661495768682501",
+    "path": "symbols/Xmagital图符/扇形阀门_2.json"
+  },
+  "控制阀左": {
+    "name": "控制阀左",
+    "code": "1922951812286291968",
+    "path": "symbols/Xmagital图符/扇形阀门4_左.json"
+  },
+  "控制阀右": {
+    "name": "控制阀右",
+    "code": "1922952034445991936",
+    "path": "symbols/Xmagital图符/扇形阀门4_右.json"
+  },
+  "控制器2": {
+    "name": "控制器2",
+    "code": "1836662427487178753",
+    "path": "symbols/Xmagital图符/A控制器.json"
+  },
+  "控制器3": {
+    "name": "控制器3",
+    "code": "1922946772960059392",
+    "path": "symbols/Xmagital图符/控制器3.json"
+  },
+  "控制器4": {
+    "name": "控制器4",
+    "code": "1922944977063944192",
+    "path": "symbols/Xmagital图符/控制器4.json"
+  },
+  "累积器2": {
+    "name": "累积器2",
+    "code": "1836662427487178753",
+    "path": "symbols/Xmagital图符/A控制器.json"
+  },
+  "累积器3": {
+    "name": "累积器3",
+    "code": "1922946772960059392",
+    "path": "symbols/Xmagital图符/控制器3.json"
+  },
+  "手操器": {
+    "name": "手操器",
+    "code": "1836666812468432896",
+    "path": "symbols/Xmagital图符/文字显示_2_2.json"
+  },
+  "跳图": {
+    "name": "跳图",
+    "code": "1923215421608337408",
+    "path": "symbols/Xmagital图符/跳图.json"
+  },
+  "跳转": {
+    "name": "跳转",
+    "code": "1836661495764488199",
+    "path": "symbols/Xmagital图符/右文字箭头.json"
+  },
+  "显示点": {
+    "name": "显示点",
+    "code": "1876461241602072576",
+    "path": "symbols/Xmagital图符/B显示点.json"
+  },
+  "信号圆": {
+    "name": "信号圆",
+    "code": "0e969f9eb98e4280703ccf4ef1750b5d",
+    "path": "symbols/hmi_case/common/lights/指示灯10-红色.json"
+  },
+  "液位": {
+    "name": "液位",
+    "code": "a1f96586170dc73bbbbca66d88c5ab85",
+    "path": "symbols/hmi_system/premium/graphbar.json"
+  },
+  "自力阀": {
+    "name": "自力阀",
+    "code": "1923221169075691520",
+    "path": "symbols/Xmagital图符/自力阀.json"
+  },
+  "自力阀左": {
+    "name": "自力阀左",
+    "code": "1923221189908799488",
+    "path": "symbols/Xmagital图符/自力阀_左.json"
+  },
+  "自力阀右": {
+    "name": "自力阀右",
+    "code": "1923221047239548928",
+    "path": "symbols/Xmagital图符/自力阀_右.json"
+  },
+  "A状态": {
+    "name": "A状态",
+    "code": "1923218237219446784",
+    "path": "symbols/Xmagital图符/状态A.json"
+  },
+  "B状态": {
+    "name": "B状态",
+    "code": "1923218364260720640",
+    "path": "symbols/Xmagital图符/状态A_2.json"
+  },
+  "C状态": {
+    "name": "C状态",
+    "code": "1923218395940298752",
+    "path": "symbols/Xmagital图符/状态A_3.json"
+  },
+  "M状态": {
+    "name": "M状态",
+    "code": "1923218458129244160",
+    "path": "symbols/Xmagital图符/状态A_4.json"
+  },
+  "MOV阀": {
+    "name": "MOV阀",
+    "code": "1922955338081148928",
+    "path": "symbols/Xmagital图符/MOV阀.json"
+  },
+  "MOV阀右": {
+    "name": "MOV阀右",
+    "code": "1922955553852923904",
+    "path": "symbols/Xmagital图符/MOV阀_右.json"
+  },
+  "MOV阀左": {
+    "name": "MOV阀左",
+    "code": "1922955530763280384",
+    "path": "symbols/Xmagital图符/MOV阀_左.json"
+  }
+}
