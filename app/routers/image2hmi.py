@@ -96,11 +96,11 @@ async def events_generator(list: List[Results], fileInfo: dict):
   """
   事件生成器函数
   """
-  yield "event: start\ndata: 开始执行图片分析任务\n\n"
+  yield "event: start\ndata: 开始图片分析任务\n\n"
   # 假装在思考
   msg = f"收到用户发送的图片{
     fileInfo['filename']
-  } ，我需要识别这个图片中的内容, 转换为 HMI 符号, 并在当前图纸上绘制出来."
+  }, 我需要识别这个图片中的内容, 转换为 HMI 符号, 并在当前图纸上绘制出来."
 
   yield f"event: message\ndata: {msg}\n\n"
   await asyncio.sleep(0.2)
@@ -142,7 +142,7 @@ async def events_generator(list: List[Results], fileInfo: dict):
       }\n\n"
 
   # 这里可以添加更多的处理逻辑，例如保存结果、绘制框等
-  yield "event: done\ndata: 图片分析完成\n\n"
+  yield "event: done\ndata: 图片分析任务完成\n\n"
 
 
 def convert_name_to_hmi_symbol(name: str):
