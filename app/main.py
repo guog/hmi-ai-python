@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import image2hmi, text2hmi
+from .routers import image2hmi, text2hmi, utils
 
 # Load environment variables
 load_dotenv()
@@ -23,3 +23,4 @@ app.add_middleware(
 # Include API router
 app.include_router(text2hmi.router)
 app.include_router(image2hmi.router)
+app.include_router(utils.router)
