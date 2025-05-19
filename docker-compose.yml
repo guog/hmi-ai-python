@@ -1,0 +1,25 @@
+services:
+  app:
+    restart: always
+    image: guog/hmi-ai-python
+    ports:
+      - "8000:8000"
+    command:
+      - fastapi
+      - run
+      #- --workers #--workers INTEGER 使用多个工作进程。与 --reload 标志互斥。[默认值：无]
+      #- "4"
+      - --reload #--reload 启用自动重新加载。仅在开发中使用。[默认值：无]
+      - "app/main.py"
+    # volumes:
+    #   - .:/hmi-ai-python
+    # env_file:
+    #   - .env
+    # environment:
+    #   - PYTHONUNBUFFERED=1
+    #   - PYTHONPATH=/hmi-ai-python
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/utils/health-check/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
