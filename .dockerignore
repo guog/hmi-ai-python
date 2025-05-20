@@ -345,3 +345,4 @@ docker-compose.yml
 .editorconfig
 .gitignore
 .gitattributes
+.github
