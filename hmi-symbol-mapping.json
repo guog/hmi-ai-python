@@ -163,5 +163,15 @@
     "name": "MOV阀左",
     "code": "1922955530763280384",
     "path": "symbols/Xmagital图符/MOV阀_左.json"
+  },
+  "横线": {
+    "name": "横线",
+    "code": "1923212338178334720",
+    "path": "symbols/Xmagital图符/横线.json"
+  },
+  "竖线": {
+    "name": "竖线",
+    "code": "1923212338178334721",
+    "path": "symbols/Xmagital图符/竖线.json"
   }
 }

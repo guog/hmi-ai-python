@@ -24,6 +24,10 @@ ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png"}
 
 # 模型路径
 MODEL_PATH = Path(__file__).parent.parent.parent / "models/hollysys-hmi.pt"
+# 线条检测模型路径
+MODEL_LINE_PATH = (
+  Path(__file__).parent.parent.parent / "models/hollysys-hmi-line.pt"
+)
 # HMI 符号映射文件路径
 SYMBOL_MAPPING_PATH = (
   Path(__file__).parent.parent.parent / "hmi-symbol-mapping.json"
@@ -45,6 +49,8 @@ except TypeError:
 
 # 预加载 YOLO 模型（确保模型文件路径正确）
 model = YOLO(MODEL_PATH)
+# 预加载 YOLO 线条检测模型
+line_model = YOLO(MODEL_LINE_PATH)
 
 
 @router.post("/image2hmi")
@@ -69,6 +75,9 @@ async def image2hmi(file: UploadFile = File(..., description="上传的文件"))
     content = await file.read()
   except Exception as e:
     raise HTTPException(500, f"文件读取失败: {str(e)}")
+  # finally:
+  #   # 确保文件被关闭
+  #   await file.close()
 
   # --------------- 将字节数据转换为 OpenCV 格式 ---------------
   try:
@@ -80,11 +89,38 @@ async def image2hmi(file: UploadFile = File(..., description="上传的文件"))
   except Exception as e:
     raise HTTPException(400, f"图像解码失败: {str(e)}")
 
-  # --------------- 使用 YOLO 模型检测 ---------------
+  # --------------- 使用 YOLO 模型检测图符 ---------------
   try:
     results = model.predict(source=img, verbose=False)  # 直接传入 numpy 数组
   except Exception as e:
     raise HTTPException(500, f"模型推理失败: {str(e)}")
+
+  # --------------- 使用 YOLO 模型检测线条 ---------------
+  try:
+    line_results = line_model.predict(source=img, verbose=False)
+    results.extend(line_results)  # 合并线条检测结果到主结果列表
+    """ print("---线条数据---")
+    for item in line_results:
+      for box in item.boxes:
+        cls = box.cls.item()
+        cls_name = item.names[int(cls)]
+        x1, y1, x2, y2 = box.xyxy[0].tolist()
+        attrs = calculate_area(x1, y1, x2, y2)
+        conf = box.conf.item()
+        origin = {
+          "name": cls_name,
+          "confidence": conf,
+          "x1": x1,
+          "y1": y1,
+          "x2": x2,
+          "y2": y2,
+        }
+        print(
+          f"线条: {json.dumps(origin, ensure_ascii=False)}\n"
+          f"{json.dumps(attrs, ensure_ascii=False)}"
+        ) """
+  except Exception as e:
+    raise HTTPException(500, f"线条检测模型推理失败: {str(e)}")
 
   # 返回事件流响应
   return StreamingResponse(
