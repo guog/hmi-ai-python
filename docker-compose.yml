@@ -1,9 +1,9 @@
 services:
   app:
     restart: always
-    image: guog/hmi-ai-python
+    image: docker.1ms.run/guog/hmi-ai-python:0.1.0
     ports:
-      - "8000:8000"
+      - "28090:8000"
     command:
       - fastapi
       - run
@@ -11,13 +11,10 @@ services:
       #- "4"
       - --reload #--reload 启用自动重新加载。仅在开发中使用。[默认值：无]
       - "app/main.py"
-    # volumes:
-    #   - .:/hmi-ai-python
-    # env_file:
-    #   - .env
-    # environment:
-    #   - PYTHONUNBUFFERED=1
-    #   - PYTHONPATH=/hmi-ai-python
+    volumes:
+      - ./hollysys-hmi.pt:/hmi-ai-python/models/hollysys-hmi.pt
+      - ./hollysys-hmi-line.pt:/hmi-ai-python/models/hollysys-hmi-line.pt
+      - ./hmi-symbol-mapping.json:/hmi-ai-python/hmi-symbol-mapping.json
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/utils/health-check/"]
       interval: 10s
