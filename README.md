@@ -28,6 +28,8 @@ source ./.venv/bin/activate
 
 - FastAPI : Web Server 框架
 - Python-dotenv : 从.env 文件读取环境变量
+- [PaddleOCR](https://paddlepaddle.github.io/PaddleOCR/v2.10.0/index.html) : v2.10.0, OCR 文字处理
+- [Ultralytics YOLO11](https://docs.ultralytics.com/zh/): YOLO 11 图像处理
 
 ## 浏览器端调用
 
