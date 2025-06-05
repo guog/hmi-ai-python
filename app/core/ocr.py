@@ -12,6 +12,7 @@ from app.core.image2hmi import calculate_area
 ocr_models: dict[str, PaddleOCR] = {}
 
 
+# 全局只初始化一次OCR模型，避免重复加载
 def get_ocr(lang: str = "ch"):
   """
   获取指定语言的OCR模型实例,若未初始化则新建。

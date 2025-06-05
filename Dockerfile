@@ -36,6 +36,9 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 ENV PYTHONPATH=/hmi-ai-python
 
+# PaddleOCR的模型存储路径
+ENV PADDLE_OCR_BASE_DIR=/hmi-ai-python/models/paddleocr
+
 
 # Sync the project
 # Ref: https://docs.astral.sh/uv/guides/integration/docker/#intermediate-layers

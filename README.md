@@ -136,3 +136,7 @@ data:{id:"chat ID",createdAt:datetime, payload:{ items:[object,object]}}
 \n
 \n
 ```
+
+## OCR
+
+OCR 支持的完整语言列表请参考[PaddleOCR 文档](https://paddlepaddle.github.io/PaddleOCR/v2.10.0/ppocr/blog/multi_languages.html#5).

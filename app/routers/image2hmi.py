@@ -39,6 +39,8 @@ async def image2hmi(
       file: 上传的图片文件
       lang: 默认中文'ch',可选'en'表示英文,
         'fr'表示法文, 'german'表示德文, 'korean'表示韩文, 'japan'表示日文
+        完整语言列表请参考PaddleOCR文档:
+        https://paddlepaddle.github.io/PaddleOCR/v2.10.0/ppocr/blog/multi_languages.html#5
       no_ocr: 是否跳过OCR识别, 默认为False
       no_symbol: 是否跳过符号识别, 默认为False
       no_line: 是否跳过线条识别, 默认为False
