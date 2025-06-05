@@ -7,7 +7,9 @@ from app.schemas.text2hmi import UserInput
 router = APIRouter()
 
 
-@router.post("/text2hmi")
+@router.post(
+  "/text2hmi", tags=["demo"], description="这是一个DEMO将文本转换为HMI图纸"
+)
 async def text2hmi(
   request: Request,
   user_input: UserInput,

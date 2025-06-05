@@ -4,6 +4,7 @@ Core logic for image to HMI conversion.
 
 import json
 import re
+from asyncio import sleep
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -12,6 +13,8 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 from ultralytics.engine.results import Results
+
+from .settings import settings
 
 # 配置常量
 ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/jpg"]
@@ -64,10 +67,34 @@ class ImageValidator:
 
 
 class HMIEventGenerator:
+  """生成HMI事件的异步生成器。
+  用于处理YOLO和PaddleOCR的识别结果，并生成HMI符号和文本事件。
+  """
+
   def __init__(self, symbol_mapper: SymbolMapper):
     self.symbol_mapper = symbol_mapper
 
-  async def generate(self, results: List[Results], fileInfo: dict):
+  async def generate(
+    self,
+    symbol_results: List[Results],
+    line_results: List[Results],
+    text_results: List[Results],
+    fileInfo: dict,
+    lang: Optional[str] = "ch",
+  ):
+    """
+    生成HMI事件的异步生成器。
+    Args:
+      symbol_results (List[Results]): YOLO识别的符号结果。
+      line_results (List[Results]): YOLO识别的线条结果。
+      text_results (List[Results]): PaddleOCR识别的文本结果。
+      fileInfo (dict): 包含文件信息的字典，如文件名、类型等。
+      lang (Optional[str]): 语言选项，默认中文'ch',可选'en'表示英文,
+        'fr'表示法文, 'german'表示德文, 'korean'表示韩文, 'japan'表示日文
+    Yields:
+      str: 生成的事件字符串，包含识别的符号、线条和文本信息。
+    """
+
     yield "event: start\ndata: 开始图片分析任务\n\n"
     msg = (
       f"收到用户发送的图片{fileInfo['filename']}, "
@@ -75,44 +102,131 @@ class HMIEventGenerator:
       f"转换为 HMI 符号, 并在当前图纸上绘制出来."
     )
     yield f"event: message\ndata: {msg}\n\n"
-    from asyncio import sleep
 
-    await sleep(0.2)
+    await sleep(settings.SERVER_SEND_EVENTS_INTERVAL)
     yield "event: message\ndata: 开始绘制:\n\n"
     index = 0
-    for item in results:
-      for box in item.boxes:
-        await sleep(0.2)
-        cls = box.cls.item()
-        cls_name = item.names[int(cls)]
-        payload = self.symbol_mapper.to_hmi_symbol(cls_name)
-        if payload is None:
-          continue
-        x1, y1, x2, y2 = box.xyxy[0].tolist()
-        attrs = calculate_area(x1, y1, x2, y2)
-        conf = box.conf.item()
-        index += 1
-        yield f"event: message\ndata: {index}. {cls_name} <br />\n\n"
-        await sleep(0.2)
-        yield f"event: symbol\ndata: {
-          json.dumps(
-            {
-              'payload': payload,
-              'origin': {
-                'name': cls_name,
-                'confidence': conf,
-                'x1': x1,
-                'y1': y1,
-                'x2': x2,
-                'y2': y2,
+
+    async def process_yolo_results(
+      results: List[Results], result_type: str, symbol_mapper: SymbolMapper
+    ):
+      """
+      处理YOLO识别结果的生成器。
+      Args:
+        results (List[Results]): YOLO识别结果列表。
+        result_type (str): 事件类型，默认为"symbol"或"line"。
+      Yields:
+        str: 生成的事件字符串，包含识别的符号或线条信息。
+      """
+      # Use `nonlocal index` to share the `index`
+      #   variable across nested functions, allowing
+      #   it to track the sequence of processed items
+      #   globally within the generator.
+      nonlocal index
+      for item in results:
+        for box in item.boxes:
+          await sleep(settings.SERVER_SEND_EVENTS_INTERVAL)
+          cls = box.cls.item()
+          cls_name = item.names[int(cls)]
+          payload = symbol_mapper.to_hmi_symbol(cls_name)
+          if payload is None:
+            continue
+          x1, y1, x2, y2 = box.xyxy[0].tolist()
+          attrs = calculate_area(x1, y1, x2, y2)
+          conf = box.conf.item()
+          index += 1
+          yield f"event: message\ndata: {index}. {cls_name} <br />\n\n"
+          await sleep(settings.SERVER_SEND_EVENTS_INTERVAL)
+          yield (
+            f"event: {result_type}\ndata: "
+            + json.dumps(
+              {
+                "payload": payload,
+                "origin": {
+                  "name": cls_name,
+                  "confidence": conf,
+                  "x1": x1,
+                  "y1": y1,
+                  "x2": x2,
+                  "y2": y2,
+                },
+                "attrs": attrs,
+                "createdAt": f"{datetime.now().isoformat()}",
               },
-              'attrs': attrs,
-              'createdAt': f'{datetime.now().isoformat()}',
-            },
-            ensure_ascii=False,
+              ensure_ascii=False,
+            )
+            + "\n\n"
           )
-        }\n\n"
-    yield "event: done\ndata: 图片分析任务完成\n\n"
+
+    async def process_paddleocr_results(
+      results: list, result_type: str = "text"
+    ):
+      """处理PaddleOCR识别结果的生成器。
+      Args:
+        results (list): PaddleOCR识别结果列表。
+        result_type (str): 事件类型，默认为"text"。
+      Yields:
+        str: 生成的事件字符串，包含识别的文本和相关信息。
+      """
+      # Use `nonlocal index` to share the `index`
+      #   variable across nested functions, allowing
+      #   it to track the sequence of processed items
+      nonlocal index
+      for item in results:
+        for box, content in item:
+          if len(content) < 2:
+            continue
+          if len(box) < 4:
+            continue
+
+          await sleep(settings.SERVER_SEND_EVENTS_INTERVAL)
+          x1, y1 = box[0]
+          x2, y2 = box[2]
+          confidence = content[1]
+          text = content[0].strip()
+          if not text:
+            continue
+          payload = {"text": text}
+          origin = {
+            "name": text,  # 识别出的文本内容
+            "confidence": confidence,  # 置信度分数
+            "x1": x1,  # 文本框左上角x坐标
+            "y1": y1,  # 文本框左上角y坐标
+            "x2": x2,  # 文本框右下角x坐标
+            "y2": y2,  # 文本框右下角y坐标
+          }
+          attrs = calculate_area(x1, y1, x2, y2)
+          index += 1
+          yield f"event: message\ndata: {index}. 文字: {text} <br />\n\n"
+          await sleep(settings.SERVER_SEND_EVENTS_INTERVAL)
+          yield (
+            f"event: {result_type}\ndata: "
+            + json.dumps(
+              {
+                "payload": payload,
+                "origin": origin,
+                "attrs": attrs,
+                "createdAt": f"{datetime.now().isoformat()}",
+              },
+              ensure_ascii=False,
+            )
+            + "\n\n"
+          )
+
+    async for msg in process_yolo_results(
+      symbol_results, "symbol", self.symbol_mapper
+    ):
+      yield msg
+
+    async for msg in process_yolo_results(
+      line_results, "line", self.symbol_mapper
+    ):
+      yield msg
+
+    async for msg in process_paddleocr_results(text_results, "text"):
+      yield msg
+
+    yield "event: done\ndata: 图片分析完成\n\n"
 
 
 def calculate_area(
