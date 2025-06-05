@@ -346,3 +346,7 @@ docker-compose.yml
 .gitignore
 .gitattributes
 .github
+.git
+__pycache__
+docs
+images
