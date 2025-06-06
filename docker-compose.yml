@@ -11,10 +11,16 @@ services:
       #- "4"
       - --reload #--reload 启用自动重新加载。仅在开发中使用。[默认值：无]
       - "app/main.py"
-    volumes:
-      - ./hollysys-hmi.pt:/hmi-ai-python/models/hollysys-hmi.pt
-      - ./hollysys-hmi-line.pt:/hmi-ai-python/models/hollysys-hmi-line.pt
-      - ./hmi-symbol-mapping.json:/hmi-ai-python/hmi-symbol-mapping.json
+    environment:
+      # 服务器发送事件(SSE)的间隔时间,单位为秒
+      # 这个值决定了服务器向客户端发送事件的频率
+      # 如果设置为0.2秒，服务器将每0.2秒向客户端发送一次事件
+      # 如果设置为1秒，服务器将每1秒向客户端发送一次事件
+      - SERVER_SEND_EVENTS_INTERVAL=0.2
+    # volumes:
+    #   - ./hollysys-hmi.pt:/hmi-ai-python/models/hollysys-hmi.pt
+    #   - ./hollysys-hmi-line.pt:/hmi-ai-python/models/hollysys-hmi-line.pt
+    #   - ./hmi-symbol-mapping.json:/hmi-ai-python/hmi-symbol-mapping.json
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/utils/health-check/"]
       interval: 10s
