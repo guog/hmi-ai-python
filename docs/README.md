@@ -5,10 +5,18 @@
 - URL: `/image2hmi`
 - METHOD: `POST`
 - Headers:
-  - `Content-Type`: `multipart/form-data; boundary=<calculated when request is sent>
-`
+  - `Content-Type`: `multipart/form-data; boundary=<calculated when request is sent>`
 - Body
   - `file` 文件
+- URL Params
+  - `no_symbol` 禁用图符识别 : 可选,默认为`false`,为`true`将禁用图符识别
+  - `no_line` 禁用管道/线条识别 : 可选,默认为`false`,为`true`将禁用管道/线条识别
+  - `no_ocr` 禁用 ocr 文字识别 : 可选,默认为`false`,为`true`将禁用 ocr 文字识别
+  - `lang` OCR 识别语言 : 可选,默认为`ch`表示中文,当`no_ocr`为`true`时此选项不生效,可选项有:
+    - `en` 英文
+    - `chinese_cht` 中文繁体
+    - `japan` 日文
+    - `korean` 韩文
 
 ### 调用示例
 
@@ -17,7 +25,7 @@
 #### curl
 
 ```shell
-curl --location 'http://127.0.0.1:8000/image2hmi' \
+curl --location 'http://127.0.0.1:8000/image2hmi?lang=ch&no_line=false&no_ocr=false&no_symbol=false' \
 --form 'file=@"/Users/guog/Downloads/images/05.png"'
 ```
 
