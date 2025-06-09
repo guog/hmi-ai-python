@@ -16,23 +16,18 @@
   },
   "电磁阀": {
     "name": "电磁阀",
-    "code": "1925150210303451136",
-    "path": "symbols/Xmagital图符/电磁阀.json"
+    "code": "1836661495764488196",
+    "path": "symbols/Xmagital图符/矩形阀门.json"
   },
   "电磁阀左": {
     "name": "电磁阀左",
     "code": "1922953514443907072",
-    "path": "symbols/Xmagital图符/电磁阀_左.json"
+    "path": "symbols/Xmagital图符/矩形阀门_左.json"
   },
   "电磁阀右": {
     "name": "电磁阀右",
     "code": "1922953503802957824",
-    "path": "symbols/Xmagital图符/电磁阀_右.json"
-  },
-  "电磁阀下": {
-    "name": "电磁阀下",
-    "code": "1925149731481706496",
-    "path": "symbols/Xmagital图符/电磁阀_下.json"
+    "path": "symbols/Xmagital图符/矩形阀门_右.json"
   },
   "电动机": {
     "name": "电动机",
@@ -44,6 +39,16 @@
     "code": "1836664296523567107",
     "path": "symbols/Xmagital图符/扇形阀门4.json"
   },
+  "控制阀上": {
+    "name": "控制阀上",
+    "code": "1836664296523567107",
+    "path": "symbols/Xmagital图符/C控制阀.json"
+  },
+  "控制阀下": {
+    "name": "控制阀下",
+    "code": "1836661495768682501",
+    "path": "symbols/Xmagital图符/扇形阀门_2.json"
+  },
   "控制阀左": {
     "name": "控制阀左",
     "code": "1922951812286291968",
@@ -54,15 +59,10 @@
     "code": "1922952034445991936",
     "path": "symbols/Xmagital图符/扇形阀门4_右.json"
   },
-  "控制阀下": {
-    "name": "控制阀下",
-    "code": "1925147880849924096",
-    "path": "symbols/Xmagital图符/扇形阀门4_下.json"
-  },
   "控制器2": {
     "name": "控制器2",
-    "code": "1925148968051269632",
-    "path": "symbols/Xmagital图符/控制器2.json"
+    "code": "1836662427487178753",
+    "path": "symbols/Xmagital图符/A控制器.json"
   },
   "控制器3": {
     "name": "控制器3",
@@ -76,18 +76,18 @@
   },
   "累积器2": {
     "name": "累积器2",
-    "code": "1925141310875361280",
-    "path": "symbols/Xmagital图符/累积器2.json"
+    "code": "1836662427487178753",
+    "path": "symbols/Xmagital图符/A控制器.json"
   },
   "累积器3": {
     "name": "累积器3",
-    "code": "1925141267426566144",
-    "path": "symbols/Xmagital图符/累积器3.json"
+    "code": "1922946772960059392",
+    "path": "symbols/Xmagital图符/控制器3.json"
   },
   "手操器": {
     "name": "手操器",
-    "code": "1925145041138343936",
-    "path": "symbols/Xmagital图符/手操器.json"
+    "code": "1836666812468432896",
+    "path": "symbols/Xmagital图符/文字显示_2_2.json"
   },
   "跳图": {
     "name": "跳图",
@@ -111,8 +111,8 @@
   },
   "液位": {
     "name": "液位",
-    "code": "1925125820585074688",
-    "path": "symbols/Xmagital图符/液位显示.jso"
+    "code": "a1f96586170dc73bbbbca66d88c5ab85",
+    "path": "symbols/hmi_system/premium/graphbar.json"
   },
   "自力阀": {
     "name": "自力阀",
@@ -154,79 +154,24 @@
     "code": "1922955338081148928",
     "path": "symbols/Xmagital图符/MOV阀.json"
   },
-  "MOV阀左": {
-    "name": "MOV阀左",
-    "code": "1922955530763280384",
-    "path": "symbols/Xmagital图符/MOV阀_左.json"
-  },
   "MOV阀右": {
     "name": "MOV阀右",
     "code": "1922955553852923904",
     "path": "symbols/Xmagital图符/MOV阀_右.json"
   },
-  "MOV阀下": {
-    "name": "MOV阀下",
-    "code": "1925154323128901632",
-    "path": "symbols/Xmagital图符/MOV阀_下.json"
+  "MOV阀左": {
+    "name": "MOV阀左",
+    "code": "1922955530763280384",
+    "path": "symbols/Xmagital图符/MOV阀_左.json"
   },
   "横线": {
     "name": "横线",
-    "code": "",
-    "path": ""
+    "code": "1923212338178334720",
+    "path": "symbols/Xmagital图符/横线.json"
   },
   "竖线": {
     "name": "竖线",
-    "code": "",
-    "path": ""
-  },
-  "阀": {
-    "name": "阀",
-    "code": "1930579597530226688",
-    "path": "symbols/Xmagital图符/横阀.json"
-  },
-  "竖阀": {
-    "name": "竖阀",
-    "code": "1930579960685649920",
-    "path": "symbols/Xmagital图符/竖阀.json"
-  },
-  "闸阀": {
-    "name": "闸阀",
-    "code": "1930583780484440064",
-    "path": "symbols/Xmagital图符/闸阀.json"
-  },
-  "闸阀竖": {
-    "name": "闸阀竖",
-    "code": "1930582390676643840",
-    "path": "symbols/Xmagital图符/闸阀_竖.json"
-  },
-  "球阀": {
-    "name": "球阀",
-    "code": "1930584055618199552",
-    "path": "symbols/Xmagital图符/球阀.json"
-  },
-  "球阀竖": {
-    "name": "球阀竖",
-    "code": "1930584019983392768",
-    "path": "symbols/Xmagital图符/球阀_竖.json"
-  },,
-  "截止阀": {
-    "name": "截止阀",
-    "code": "1930586319988711424",
-    "path": "symbols/Xmagital图符/截止阀.json"
-  },
-  "竖截止阀": {
-    "name": "竖截止阀",
-    "code": "1930586363626250240",
-    "path": "symbols/Xmagital图符/截止阀_竖.json"
-  },
-  "流量仪表": {
-    "name": "流量仪表",
-    "code": "1930586931719561216",
-    "path": "symbols/Xmagital图符/流量计.json"
-  },
-  "跳转左": {
-    "name": "跳转左",
-    "code": "1836661495764488200",
-    "path": "symbols/Xmagital图符/左文字箭头.json"
+    "code": "1923212338178334721",
+    "path": "symbols/Xmagital图符/竖线.json"
   }
 }
